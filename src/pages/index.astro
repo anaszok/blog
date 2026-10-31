@@ -1,0 +1,100 @@
+---
+// HOME PAGE = About me
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PostCard from '../components/PostCard.astro';
+import { SITE, url } from '../config';
+
+const focus = [
+  {
+    title: 'Structural Engineering',
+    text: 'Analysis, design and detailing of building structures.',
+  },
+  {
+    title: 'BIM',
+    text: 'Revit modeling, templates, families and model coordination.',
+  },
+  {
+    title: 'Automation',
+    text: 'Learning C# and Python to automate repetitive Revit and documentation tasks.',
+  },
+  {
+    title: 'AEC Technology',
+    text: 'Tools and workflows that make design and construction faster and more reliable.',
+  },
+];
+
+const tools = ['Revit', 'Dynamo', 'C#', 'Python', 'Navisworks', 'AutoCAD'];
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 3);
+---
+
+<BaseLayout>
+  <section class="glass rounded-3xl p-6 sm:p-10">
+    <p class="font-mono text-xs tracking-widest text-accent uppercase">About me</p>
+    <h1 class="mt-3 text-4xl font-bold tracking-tight text-white sm:text-5xl">
+      Hi, I'm <span class="text-gradient">{SITE.name.split(' ')[0]}</span>.
+    </h1>
+    <p class="mt-2 text-base font-medium text-slate-300 sm:text-lg">{SITE.role}</p>
+    <p class="mt-5 max-w-2xl leading-relaxed text-slate-400">
+      I'm a structural and BIM engineer, passionate about bridging construction technology with
+      the buildings we design and build. This blog is where I write about structural engineering,
+      BIM, Revit, automation, and the tools changing how our industry works.
+    </p>
+    <div class="mt-7 flex flex-wrap gap-3">
+      <a
+        href={url('/blog')}
+        class="rounded-full bg-gradient-to-r from-accent-blue to-accent-green px-5 py-2.5 text-sm font-semibold text-ink"
+      >
+        Read the blog
+      </a>
+      <a
+        href={url('/contact')}
+        class="glass glass-hover rounded-full px-5 py-2.5 text-sm font-semibold text-white"
+      >
+        Get in touch
+      </a>
+    </div>
+  </section>
+
+  <section class="mt-12">
+    <h2 class="text-xl font-semibold text-white">What I work on</h2>
+    <div class="mt-5 grid gap-4 sm:grid-cols-2">
+      {
+        focus.map((item) => (
+          <div class="glass rounded-2xl p-5">
+            <h3 class="font-semibold text-white">{item.title}</h3>
+            <p class="mt-1.5 text-sm leading-relaxed text-slate-400">{item.text}</p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="mt-12">
+    <h2 class="text-xl font-semibold text-white">Tools</h2>
+    <div class="mt-4 flex flex-wrap gap-2">
+      {tools.map((tool) => <span class="chip px-3 py-1 text-sm">{tool}</span>)}
+    </div>
+  </section>
+
+  {
+    posts.length > 0 && (
+      <section class="mt-12">
+        <div class="flex items-baseline justify-between">
+          <h2 class="text-xl font-semibold text-white">Latest posts</h2>
+          <a href={url('/blog')} class="text-sm text-accent hover:underline">
+            View all
+          </a>
+        </div>
+        <div class="mt-5 grid gap-4">
+          {posts.map((post) => (
+            <PostCard id={post.id} {...post.data} />
+          ))}
+        </div>
+      </section>
+    )
+  }
+</BaseLayout>
