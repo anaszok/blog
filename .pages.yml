@@ -1,9 +1,11 @@
 # Settings for Pages CMS (app.pagescms.org), the phone friendly editor for this blog.
 
-# Where uploaded images are saved, and the web address they get on the site.
+# Where uploaded files (pictures, GIFs, PDFs, videos) are saved, and their web address.
+# "safe" renames uploads to lowercase with dashes, so "IMG 1234.PNG" becomes "img-1234.png".
 media:
-  input: public/images
-  output: /blog/images
+  input: public/uploads
+  output: /blog/uploads
+  rename: safe
 
 content:
   - name: blog
