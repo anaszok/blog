@@ -1,0 +1,47 @@
+# Settings for Pages CMS (app.pagescms.org), the phone friendly editor for this blog.
+
+# Where uploaded images are saved, and the web address they get on the site.
+media:
+  input: public/images
+  output: /blog/images
+
+content:
+  - name: blog
+    label: Blog posts
+    type: collection
+    path: src/content/blog
+    # The file name (and web address) is made from the title, like "my-first-post.md"
+    filename: "{primary}.md"
+    view:
+      fields: [title, date, draft]
+      sort: [date, title]
+      default:
+        sort: date
+        order: desc
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: description
+        label: Short summary
+        description: One sentence shown on the blog list.
+        type: text
+        required: true
+      - name: date
+        label: Date
+        type: date
+        required: true
+      - name: tags
+        label: Tags
+        description: Lowercase, for example bim or revit.
+        type: string
+        list: true
+      - name: draft
+        label: Draft (hidden from the site)
+        description: Switch off when you are ready to publish.
+        type: boolean
+        default: true
+      - name: body
+        label: Post
+        type: rich-text

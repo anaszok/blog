@@ -4,7 +4,16 @@ Personal blog of Anas Zokronain: structural engineering, BIM, Revit and construc
 
 Built with [Astro](https://astro.build) and [Tailwind CSS](https://tailwindcss.com). Hosted free on GitHub Pages.
 
-## Write a new post (from your phone)
+## Write a new post with Pages CMS (easiest on a phone)
+
+1. Open [app.pagescms.org](https://app.pagescms.org) in Safari and sign in with GitHub.
+2. Pick the **blog** repo, then **Blog posts → Add an entry**.
+3. Fill in the form. New posts start as **Draft**, so they stay hidden.
+4. Tap **Save**. When ready to publish, switch **Draft** off and save again.
+
+The editor settings live in `.pages.yml`.
+
+## Write a new post in GitHub (manual way)
 
 1. Open this repo on GitHub in Safari (or the GitHub app).
 2. Go to `src/content/blog/`.
